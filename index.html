@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Destination Paradise</title>
+    <style>
+      /* Global Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body,
+      html {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        scroll-behavior: smooth;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      /* Animation keyframes */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate {
+        opacity: 0;
+      }
+      .animate.visible {
+        animation: fadeInUp 1s ease-out forwards;
+      }
+
+      /* Header and Navigation */
+      header {
+        background: url("https://images.unsplash.com/photo-1493558103817-58b2924bce98?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80")
+          no-repeat center center/cover;
+        height: 100vh;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      header h1,
+      header p {
+        position: relative;
+        z-index: 1;
+      }
+      header h1 {
+        font-size: 4em;
+      }
+      header p {
+        font-size: 1.5em;
+        margin: 20px 0 40px;
+      }
+      nav {
+        position: absolute;
+        top: 20px;
+        width: 100%;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+      }
+      nav ul li {
+        margin: 0 15px;
+      }
+      nav ul li a {
+        color: #fff;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+      }
+      nav ul li a:hover {
+        color: #f39c12;
+      }
+
+      /* Section Styles */
+      section {
+        padding: 60px 20px;
+        text-align: center;
+      }
+      section h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      /* Features & Gallery */
+      .features,
+      .offers-container,
+      .testimonials-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+      }
+      .feature-item,
+      .offer-item {
+        background: #fff;
+        padding: 20px;
+        flex: 1 1 300px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+      .feature-item:hover,
+      .offer-item:hover {
+        transform: translateY(-5px);
+      }
+      .feature-item img,
+      .offer-item img {
+        width: 100%;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+      .feature-item img:hover,
+      .offer-item img:hover {
+        transform: scale(1.05);
+      }
+      .feature-item h3,
+      .offer-item h3 {
+        margin-top: 15px;
+        color: #f39c12;
+      }
+      .feature-item p,
+      .offer-item p {
+        color: #555;
+        margin: 10px 0;
+      }
+      .offer-item a {
+        display: inline-block;
+        margin-top: 10px;
+        background: #f39c12;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background 0.3s ease;
+      }
+      .offer-item a:hover {
+        background: #e67e22;
+      }
+
+      /* Call to Action */
+      .cta {
+        background: #f39c12;
+        color: #fff;
+        padding: 50px 20px;
+        margin-top: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta a {
+        background: #fff;
+        color: #f39c12;
+        padding: 15px 30px;
+        font-weight: bold;
+        border-radius: 30px;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      .cta a:hover {
+        background: #e67e22;
+        color: #fff;
+      }
+
+      /* Special Offers Section */
+      #offers {
+        background-color: #fafafa;
+      }
+      #offers h2 {
+        margin-bottom: 40px;
+      }
+
+      /* Testimonials Section */
+      #testimonials {
+        background-color: #fff;
+        padding: 60px 20px;
+      }
+      .testimonials-container {
+        gap: 20px;
+      }
+      .testimonial-item {
+        background: #fafafa;
+        padding: 20px;
+        border-radius: 10px;
+        flex: 1 1 300px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        font-style: italic;
+        position: relative;
+      }
+      .testimonial-item h4 {
+        margin-top: 15px;
+        color: #f39c12;
+        font-style: normal;
+      }
+
+      /* Contact Form */
+      #contact form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      #contact input,
+      #contact textarea,
+      #contact button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      #contact button {
+        background: #f39c12;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background 0.3s ease;
+      }
+      #contact button:hover {
+        background: #e67e22;
+      }
+
+      /* Footer & Newsletter */
+      footer {
+        background: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .newsletter {
+        margin-bottom: 20px;
+      }
+      .newsletter h3 {
+        margin-bottom: 10px;
+      }
+      .newsletter form {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .newsletter input[type="email"] {
+        flex: 1 1 250px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+      }
+      .newsletter button {
+        padding: 10px 20px;
+        background: #f39c12;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .newsletter button:hover {
+        background: #e67e22;
+      }
+
+      /* Back to Top Button */
+      #back-to-top {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        background: #f39c12;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2em;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        display: none;
+        z-index: 100;
+      }
+      #back-to-top:hover {
+        opacity: 1;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 3em;
+        }
+        header p {
+          font-size: 1.2em;
+        }
+        nav ul li {
+          margin: 0 10px;
+        }
+        .features,
+        .offers-container,
+        .testimonials-container {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header id="home">
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#offers">Offers</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <h1 class="animate">Welcome to Destination Paradise</h1>
+      <p class="animate">Discover your dream getaway</p>
+    </header>
+
+    <!-- Destinations Section -->
+    <section id="destinations">
+      <h2 class="animate">Our Top Destinations</h2>
+      <div class="features">
+        <div class="feature-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Beach Escapes"
+          />
+          <h3>Beach Escapes</h3>
+          <p>
+            Relax on sun-kissed shores with crystal clear water and pristine
+            sands.
+          </p>
+        </div>
+        <div class="feature-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Mountain Retreats"
+          />
+          <h3>Mountain Retreats</h3>
+          <p>
+            Embrace tranquility with breathtaking mountain views and fresh air.
+          </p>
+        </div>
+        <div class="feature-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="City Adventures"
+          />
+          <h3>City Adventures</h3>
+          <p>
+            Experience the vibrant life of cities rich in culture and history.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="cta">
+      <h2 class="animate">Plan Your Trip Today!</h2>
+      <a href="#contact" class="animate">Get in Touch</a>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+      <h2 class="animate">Gallery</h2>
+      <div class="features">
+        <div class="feature-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Scenic View"
+          />
+        </div>
+        <div class="feature-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Sunset"
+          />
+        </div>
+        <div class="feature-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Paradise"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section id="offers">
+      <h2 class="animate">Special Offers</h2>
+      <div class="offers-container">
+        <div class="offer-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Summer Escape Deal"
+          />
+          <h3>Summer Escape Deal</h3>
+          <p>
+            Enjoy up to 30% off on our exclusive beach holiday packages this
+            summer!
+          </p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="offer-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Mountain Adventure"
+          />
+          <h3>Mountain Adventure</h3>
+          <p>
+            Get special rates on mountain retreats and hiking tours. Book now!
+          </p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="offer-item animate">
+          <img
+            src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="City Break Special"
+          />
+          <h3>City Break Special</h3>
+          <p>
+            Discover the charm of the city with our limited-time deals for urban
+            explorers.
+          </p>
+          <a href="#">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+      <h2 class="animate">What Our Clients Say</h2>
+      <div class="testimonials-container">
+        <div class="testimonial-item animate">
+          <p>
+            "The trip was a dream come true! Every detail was perfect. I can't
+            wait to book my next adventure."
+          </p>
+          <h4>- Alex Johnson</h4>
+        </div>
+        <div class="testimonial-item animate">
+          <p>
+            "Exceptional service and breathtaking destinations. Destination
+            Paradise exceeded all my expectations!"
+          </p>
+          <h4>- Maria Rodriguez</h4>
+        </div>
+        <div class="testimonial-item animate">
+          <p>
+            "A seamless experience from booking to the final return. Highly
+            recommended for a hassle-free vacation."
+          </p>
+          <h4>- David Lee</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 class="animate">Contact Us</h2>
+      <form action="#" method="post" class="animate">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea
+          name="message"
+          rows="5"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer with Newsletter Subscription -->
+    <footer>
+      <div class="newsletter">
+        <h3 class="animate">Subscribe to Our Newsletter</h3>
+        <form action="#" method="post" class="animate">
+          <input
+            type="email"
+            name="newsletter-email"
+            placeholder="Enter your email"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <p>&copy; 2025 Destination Paradise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top">&#8679;</button>
+
+    <script>
+      // IntersectionObserver to add animation on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      document.querySelectorAll(".animate").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Back to Top button functionality
+      const btnTop = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          btnTop.style.display = "block";
+        } else {
+          btnTop.style.display = "none";
+        }
+      });
+
+      btnTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>
