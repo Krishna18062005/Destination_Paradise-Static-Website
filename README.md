@@ -25,7 +25,6 @@ This project is a front-end template built with HTML, CSS, and JavaScript. It fe
 
 - **HTML5** for structure.
 - **CSS3** for styling and animations.
-- **JavaScript** for interactive features.
 
 ## Getting Started
 
